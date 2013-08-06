@@ -1,0 +1,12 @@
+flask==0.10
+#flask-login
+#flask-openid
+#flask-mail
+#sqlalchemy==0.7.9
+#flask-sqlalchemy==
+#sqlalchemy-migrate
+#flask-whooshalchemy==0.54a
+#flask-wtf
+#pytz==2013b
+#flask-babel==0.8
+#flup
