@@ -6,7 +6,7 @@ flask==0.10
 #flask-sqlalchemy==
 #sqlalchemy-migrate
 #flask-whooshalchemy==0.54a
-#flask-wtf
+flask-wtf==0.9.0
 #pytz==2013b
 #flask-babel==0.8
 #flup
