@@ -36,3 +36,6 @@ nosetests.xml
 
 # SQLite
 *.db
+
+# OpenID
+tmp/

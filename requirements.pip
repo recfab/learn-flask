@@ -1,9 +1,9 @@
 Flask==0.10
 Flask-WTF==0.9.0
-Flask-SQLAlchemy=1.0
-alembic=0.6.0
-#flask-login
-#flask-openid
+Flask-SQLAlchemy==1.0
+alembic==0.6.0
+Flask-Login==0.2.7
+Flask-Openid==1.1.1
 #flask-mail
 #flask-whooshalchemy==0.54a
 #pytz==2013b
