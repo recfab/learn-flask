@@ -4,7 +4,7 @@ Flask-SQLAlchemy==1.0
 alembic==0.6.0
 Flask-Login==0.2.7
 Flask-Openid==1.1.1
-#flask-mail
+Flask-Mail
 #flask-whooshalchemy==0.54a
 #pytz==2013b
 #flask-babel==0.8

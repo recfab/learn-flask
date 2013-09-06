@@ -37,5 +37,6 @@ nosetests.xml
 # SQLite
 *.db
 
-# OpenID
+# Folders
 tmp/
+logs/

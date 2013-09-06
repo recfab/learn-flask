@@ -8,6 +8,9 @@
         <li>
         <label>Your Nickname:</label>
         {{form.nickname()}}
+        {% for error in form.errors.nickname %}
+        <span style="color:red;">[{{error}}]</span>
+        {% endfor %}
         </li>
         <li>
         <label>About Yourself:</label>
