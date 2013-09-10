@@ -27,9 +27,10 @@ class User(db.Model):
         lazy = 'dynamic')
 
     def avatar(self, size):
-        if not self.email:
-            return None
-        return 'http://www.gravatar.com/avatar/' + md5(self.email).hexdigest() + '?d=mm&s=' + str(size)
+        digest = ''
+        if self.email:
+            digest = md5(self.email).hexdigest()
+        return 'http://www.gravatar.com/avatar/' + digest + '?d=mm&s=' + str(size)
 
     def is_authenticated(self):
         return True
