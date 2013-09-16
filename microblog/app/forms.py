@@ -28,3 +28,7 @@ class EditForm(Form):
 
 class PostForm(Form):
     post = TextField('post', validators = [Required(),Length(min=0, max=140)])
+
+class SearchForm(Form):
+    query = TextField('query', validators = [Required()])
+

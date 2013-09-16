@@ -11,8 +11,12 @@
     <div>Microblog: 
         <a href="{{ url_for('index') }}">Home</a>
         {% if g.user.is_authenticated() %}
-        | <a href="{{ url_for('user', nickname = g.user.nickname ) }}">Your profile</a>
+        | <a href="{{ url_for('user', nickname = g.user.nickname ) }}">Your profile</a>        
         | <a href="{{ url_for('logout') }} ">Logout</a>
+        <form style="display:inline" action="{{url_for('search')}}" method="get" name="search">            
+            {{g.search_form.query()}}
+            <input type="submit" value="Search">
+        </form>
         {% endif %}
     </div>
     <hr>

@@ -5,7 +5,7 @@ alembic==0.6.0
 Flask-Login==0.2.7
 Flask-Openid==1.1.1
 Flask-Mail
-#flask-whooshalchemy==0.54a
+Flask-WhooshAlchemy==0.55a
 #pytz==2013b
 #flask-babel==0.8
 #flup
