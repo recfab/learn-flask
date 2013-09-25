@@ -1,5 +1,9 @@
+from email_config import MAIL_SERVER, MAIL_PORT, MAIL_USE_TLS, MAIL_USE_SSL, MAIL_USERNAME, MAIL_PASSWORD
+
+# administrator list
+ADMINS = ['your-gmail-username@gmail.com']
 import os
-basedir = os.path.abspath(os.path.dirname(__file__))
+basedir = os.path.join(os.path.abspath(os.path.dirname(__file__)), '..')
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
@@ -15,12 +19,6 @@ OPENID_PROVIDERS = [
     { 'name': 'Flickr', 'url': 'http://www.flickr.com/<username>' },
     { 'name': 'MyOpenID', 'url': 'https://www.myopenid.com' }]
     
-MAIL_SERVER = 'localhost'
-MAIL_PORT = 25
-MAIL_USERNAME = None
-MAIL_PASSWORD = None
-
-ADMINS = ['you@example.com']
 
 POSTS_PER_PAGE = 3
 

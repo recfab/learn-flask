@@ -40,3 +40,6 @@ nosetests.xml
 # Folders
 tmp/
 logs/
+
+# Env specific settings
+microblog/config/email_config.py
