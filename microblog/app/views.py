@@ -1,11 +1,13 @@
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask.ext.login import login_user, logout_user, current_user, login_required
-from app import app, db, lm, oid
+from flask.ext.babel import gettext as _
+
+from app import app, db, lm, oid, babel
 from forms import LoginForm, EditForm, PostForm, SearchForm
 from models import User, ROLE_USER, ROLE_ADMIN, Post
 from datetime import datetime
 
-from config import POSTS_PER_PAGE, MAX_SEARCH_RESULTS
+from config import POSTS_PER_PAGE, MAX_SEARCH_RESULTS, LANGUAGES
 from emails import follower_notification
 
 @app.before_request
@@ -27,7 +29,7 @@ def index(page = 1):
         post = Post(body=form.post.data, timestamp=datetime.utcnow(), author = g.user)
         db.session.add(post)
         db.session.commit()
-        flash('Your post is now live!')
+        flash(_('Your post is now live!'))
         return redirect(url_for('index'))
     posts = g.user.followed_posts().paginate(page, POSTS_PER_PAGE, False)
     return render_template("index.html",
@@ -55,7 +57,7 @@ def login():
 @oid.after_login
 def after_login(resp):
     if resp.identity_url is None or resp.identity_url == "":
-        flash('Invalid login. Please try again')
+        flash(_('Invalid login. Please try again'))
         return redirect(url_for('login'))
     user = User.query.filter_by(identity_url = resp.identity_url).first()
     if user is None:
@@ -97,7 +99,7 @@ def load_user(id):
 def user(nickname, page = 1):
     user = User.query.filter_by(nickname = nickname).first()
     if user == None:
-        flash('User ' + nickname + ' not found.')
+        flash(_('User %(nickname)s not found.', nickname = nickname))
         return redirect(url_for('index'))
     posts = user.posts.paginate(page, POSTS_PER_PAGE, False)
     return render_template('user.html',
@@ -113,7 +115,7 @@ def edit():
         g.user.about_me = form.about_me.data
         db.session.add(g.user)
         db.session.commit()
-        flash('Your changes have been saved')
+        flash(_('Your changes have been saved'))
         return redirect(url_for('edit'))
     else:
         form.nickname.data = g.user.nickname
@@ -134,18 +136,18 @@ def internal_error(error):
 def follow(nickname):
     user = User.query.filter_by(nickname = nickname).first()
     if user == None:
-        flash('User' + nickname + ' not found.')
+        flash(_('User %(nickname)s not found.', nickname = nickname))
         return redirect(url_for('index'))
     if user == g.user:
-        flash('You can\'t follow yourself!')
+        flash(_('You can\'t follow yourself!'))
         return redirect(url_for('user', nickname = nickname))
     u = g.user.follow(user)
     if u is None:
-        flash('Cannot follow ' + nickname + '.')
+        flash(_('Cannot follow %(nickname)s.', nickname = nickname))
         return redirect(url_for('user', nickname = nickname))
     db.session.add(u)
     db.session.commit()
-    flash('You are now following ' + nickname + '.')
+    flash(_('You are now following %(nickname)s.', nickname = nickname))
     follower_notification(user, g.user)
     return redirect(url_for('user', nickname = nickname))
 
@@ -153,18 +155,18 @@ def follow(nickname):
 def unfollow(nickname):
     user = User.query.filter_by(nickname = nickname).first()
     if user == None:
-        flash('User ' + nickname + ' not found.')
+        flash(_('User %(nickname) not found.', nickname = nickname))
         return redirect(url_for('index'))
     if user == g.user:
-        flash('You can\'t unfollow yourself!')
+        flash(_('You can\'t unfollow yourself!'))
         return redirect(url_for('user', nickname = nickname))
     u = g.user.unfollow(user)
     if u is None:
-        flash('Cannot unfollow ' + nickname + '.')
+        flash(_('Cannot unfollow %(nickname).', nickname = nickname))
         return redirect(url_for('user', nickname = nickname))
     db.session.add(u)
     db.session.commit()
-    flash('You have stopped following ' + nickname + '.')
+    flash(_('You have stopped following %(nickname)s.', nickname = nickname))
     return redirect(url_for('user', nickname = nickname))
 
 @app.route('/search', methods=['GET'])
@@ -175,3 +177,8 @@ def search():
     return render_template('search_results.html',
         query = query,
         results = results)
+
+@babel.localeselector
+def get_locale():
+    return 'es' #request.accept_languages.best_match(LANGUAGES.keys())
+        

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from email_config import MAIL_SERVER, MAIL_PORT, MAIL_USE_TLS, MAIL_USE_SSL, MAIL_USERNAME, MAIL_PASSWORD
 
 # administrator list
@@ -24,3 +26,8 @@ POSTS_PER_PAGE = 3
 
 WHOOSH_BASE = os.path.join(basedir, 'search.db')
 MAX_SEARCH_RESULTS = 50
+
+LANGUAGES = {
+    'en': 'English',
+    'es': 'Español'
+}

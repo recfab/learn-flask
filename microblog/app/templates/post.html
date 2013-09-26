@@ -1,6 +1,5 @@
 <div>
     <img src="{{post.author.avatar(50)}}"> 
-    <em>{{post.author.nickname}} says: </em>
-    <time datetime="{{post.timestamp}}">{{post.timestamp}}</time>
+    {{ _('%(nickname)s said %(when)s', nickname = post.author.nickname, when = post.timestamp ) }}
     <p>{{post.body}}</p>
 <div>

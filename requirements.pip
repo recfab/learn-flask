@@ -7,5 +7,5 @@ Flask-Openid==1.1.1
 Flask-Mail
 Flask-WhooshAlchemy==0.55a
 #pytz==2013b
-#flask-babel==0.8
+Flask-Babel==0.9
 #flup
