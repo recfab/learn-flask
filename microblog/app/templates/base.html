@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     {% if title %}
@@ -5,6 +6,9 @@
     {% else %}
     <title>Welcome to microblog</title>
     {% endif %}
+    
+    <link href="/static/css/normalize.css" rel="stylesheet">
+    
     {% block additional_head %}{% endblock %}
   </head>
   <body>
